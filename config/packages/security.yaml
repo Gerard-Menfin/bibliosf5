@@ -1,0 +1,47 @@
+security:
+    encoders:
+        App\Entity\Abonne:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Abonne
+                property: pseudo
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            lazy: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/admin/abonne/ajouter, roles: ROLE_BIBLIOTHECAIRE }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/biblio.*supprimer, roles: ROLE_ADMIN }
+        - { path: ^/biblio, roles: ROLE_BIBLIOTHECAIRE }
+        - { path: ^/profil, roles: IS_AUTHENTICATED_FULLY }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_BIBLIOTHECAIRE, ROLE_ARCHIVISTE
+        ROLE_BIBLIOTHECAIRE: ROLE_ABONNE
+        # les admins ont maintenant les mêmes droits que les bibliothécaires

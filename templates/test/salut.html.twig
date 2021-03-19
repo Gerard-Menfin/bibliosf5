@@ -1,0 +1,28 @@
+{# extends : signifie que le fichier acutel hérite du fichier base.html.twig 
+    Dans une vue qui "hérite" d'une autre vue, on ne peut pas mettre de contenu en dehors d'un block 
+#}
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <p>Bonjour, {{ prenom }} !</p>
+{% endblock %}
+
+{% block title %}Salutations ! {% endblock %}
+
+{# <h2>Au revoir</h2> #}
+
+{% block invisible %}
+    Le contenu de ce block ne sera pas affiché parce qu'il n'existe pas dans base.html.twig
+    mais il n'y aura pas d'erreur
+{% endblock %}
+
+{% block stylesheets %}
+    {# La fonction parent() permet de retourner le contenu du block de la vue parent, ce qui permet de ne pas 
+        l'écraser #}
+    {{ parent() }}
+    <style>
+        p{
+            color: red;
+        }
+    </style>
+{% endblock %}

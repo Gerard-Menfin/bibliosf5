@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ form(formRecherche) }}
+
+    {% if livres is not null  %}
+        <h2>Résultats trouvés parmi les livres : </h2>
+        {% for livre in livres %}
+            <div class="card-deck">
+                {% include "livre/vignette.html.twig" with { l: livre } %}
+            </div>
+        {% else %}
+            <div class="alert alert-danger">Aucun livre ne correspond à la recherche</div>
+        {% endfor %}
+
+        <h2>Résultats trouvés parmi les abonnés : </h2>
+        {% for abonne in abonnes %}
+            <div class="card-deck">
+                {{ include("abonne/vignette.html.twig", {a: abonne}) }}
+            </div>
+        {% else %}
+            <div class="alert alert-danger">Aucun abonné ne correspond à la recherche</div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

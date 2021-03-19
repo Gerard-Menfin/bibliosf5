@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% if a > 12 %}
+        a est supérieur à 12
+    {% elseif a == 12 %}
+        a est égal à 12
+    {% else %}
+        a est inférieur à 12
+    {% endif %}
+    <hr>
+    {% if a > 12 and a < 24 %}
+        a est compris entre 12 et 24
+    {% elseif a == 12 or a != 24 %}
+        a est égal à 12 ou a est différent de 24
+    {% elseif not a < 36 %}
+        a est supérieur ou égal à 36
+    {% endif %}
+
+    <h2>Tests</h2>
+    {% if b is defined %}
+        b est défini et vaut {{ b }}
+    {% else %}
+        b n'est pas défini
+    {% endif %}
+    <hr>
+    {% if b is defined and b is not empty %}
+        <p>b n'est pas vide</p>
+    {% else %}
+        <p>b est vide ou n'est pas défini</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <form action="{{ path("test_donnees") }}" method="post">
+        <div class="form-group">
+            <label for="">Pseudo</label>
+            <input type="text" name="pseudo" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Mot de passe</label>
+            <input type="text" name="mdp" class="form-control">
+        </div>
+
+        <button class="btn btn-primary">Envoyer</button>
+    </form>
+{% endblock %}

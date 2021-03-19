@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {# {{ form(formLivre) }} #}
+
+    {{ form_start(formLivre) }}
+
+        {{ form_row(formLivre.auteur) }}
+        {{ form_row(formLivre.titre) }}
+
+        <div class="row">
+            {% set livre = formLivre.vars.value %}
+            <img src="{{ url_images_livres ~ livre.couverture }}" class="col-2">
+            {{ form_row(formLivre.couverture, {
+                attr: {
+                    class: "col-10"
+                }
+            } )}}
+        </div>
+        <div class="d-flex justify-content-between">
+            {{ form_widget(formLivre.enregistrer) }}
+            <a class="btn btn-danger" href="{{ path("livre") }}">Annuler</a>
+        </div>
+
+    {{ form_end(formLivre) }}
+{% endblock %}

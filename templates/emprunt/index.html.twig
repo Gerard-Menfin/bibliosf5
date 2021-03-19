@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emprunt index{% endblock %}
+
+{% block body %}
+    <h1>Emprunt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Abonné</th>
+                <th>Livre</th>
+                <th>Emprunté le</th>
+                <th>Retourné le</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emprunt in emprunts %}
+            <tr>
+                <td>{{ emprunt.id }}</td>
+                <td>{{ emprunt.abonne.pseudo }}</td>
+                <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
+                <td>{{ emprunt.dateEmprunt ? emprunt.dateEmprunt|date('d/m/y') : '' }}</td>
+                <td>{{ emprunt.dateRetour ? emprunt.dateRetour|date('d/m/y') : '' }}</td>
+                <td>
+                    <a href="{{ path('emprunt_show', {'id': emprunt.id}) }}">show</a>
+                    <a href="{{ path('emprunt_edit', {'id': emprunt.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Emprunts non rendus</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Abonné</th>
+                <th>Livre</th>
+                <th>Emprunté le</th>
+                <th>Retourné le</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emprunt in nonRendus %}
+            <tr>
+                <td>{{ emprunt.id }}</td>
+                <td>{{ emprunt.abonne.pseudo }}</td>
+                <td>{{ emprunt.livre.titre ~ " - " ~ emprunt.livre.auteur }}</td>
+                <td>{{ emprunt.dateEmprunt ? emprunt.dateEmprunt|date('d/m/y') : '' }}</td>
+                <td>{{ emprunt.dateRetour ? emprunt.dateRetour|date('d/m/y') : '' }}</td>
+                <td>
+                    <a href="{{ path('emprunt_show', {'id': emprunt.id}) }}">show</a>
+                    <a href="{{ path('emprunt_edit', {'id': emprunt.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('emprunt_new') }}">Create new</a>
+{% endblock %}

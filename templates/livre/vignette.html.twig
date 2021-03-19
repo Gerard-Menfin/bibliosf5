@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ l.titre }}</h5>
+    <p class="card-text">{{ l.auteur }}</p>
+    <a href="{{ path("profil_emprunter", {id: l.id}) }}" 
+       class="btn btn-primary {{ l in livres_indisponibles ? "disabled" : "" }}">Emprunter</a>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Biblio : Accueil{% endblock %}
+
+{% block body %}
+    <div class="card-columns">
+        {% for livre in livres %}
+            {# set : permet de définir une variabLe dans un fichier TWIG #}
+            {# {% set l = livre %} #}
+            {% include "livre/vignette.html.twig" with {'l': livre} %}
+        {% endfor %}
+    </div>
+
+    {# EXO affichez la liste des livres sous forme de 'cards' dans la page d'accueil #}
+{% endblock %}
